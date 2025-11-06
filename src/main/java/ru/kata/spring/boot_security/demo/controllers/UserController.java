@@ -19,17 +19,19 @@ public class UserController {
         this.userService = userService;
     }
 
-    // Перенаправление /users -> /user
-    @GetMapping("/users")
-    public String redirectToUser() {
-        return "redirect:/user";
-    }
 
     // Страница пользователя
     @GetMapping
     public String UserProfile(Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
+        if (user.getRoles() != null) {
+            user.getRoles().size();
+        }
+
+        // Оба варианта: оставляем "user" и добавляем "currentUser" как алиас
         model.addAttribute("user", user);
+        model.addAttribute("currentUser", user);
+
         return "user";
     }
 }
