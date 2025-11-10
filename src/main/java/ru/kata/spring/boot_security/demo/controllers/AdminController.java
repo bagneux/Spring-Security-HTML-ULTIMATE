@@ -9,6 +9,7 @@ import ru.kata.spring.boot_security.demo.entities.Role;
 import ru.kata.spring.boot_security.demo.entities.User;
 import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
 import ru.kata.spring.boot_security.demo.service.UserService;
+import ru.kata.spring.boot_security.demo.service.UserServiceInterface;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -19,16 +20,14 @@ import java.util.Set;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final UserService userService;
+    private final UserServiceInterface userService;
     private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
 
-    public AdminController(UserService userService,
-                           RoleRepository roleRepository,
-                           PasswordEncoder passwordEncoder) {
+
+    public AdminController(UserServiceInterface userService,
+                           RoleRepository roleRepository) {
         this.userService = userService;
         this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     // Главная страница админа (одна страница admin)

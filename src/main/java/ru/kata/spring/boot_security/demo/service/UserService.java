@@ -59,6 +59,7 @@ public class UserService implements UserDetailsService, UserServiceInterface {
     //CRUD методы
 
     @Override
+    @Transactional
     public User saveUser(String username, String rawPassword, Set<Role> roles) {
         User user = new User();
         user.setUsername(username);
@@ -67,26 +68,31 @@ public class UserService implements UserDetailsService, UserServiceInterface {
         return userRepository.save(user);
     }
     @Override
+    @Transactional
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
     @Override
+    @Transactional
     public User findById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public User findByUsername(String name) {
        return userRepository.findByUsername(name);
     }
 
     @Override
+    @Transactional
     public User updateUser(Long id, String username, String rawPassword, Set<Role> roles) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (!optionalUser.isPresent()) {
